@@ -32,8 +32,6 @@ class MainForm(npyscreen.ActionForm):
 
     def show_results(self):
 
-        #npyscreen.notify_confirm(str(self.getOptions()[self.convert_to.value]), title='ERROR')
-
         # Check to see if user is trying to convert to the same currency, alert if so
         if self.convert_from.value == self.convert_to.value:
             # display error
