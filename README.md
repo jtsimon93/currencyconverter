@@ -6,9 +6,11 @@ I created this project to learn more about using JSON APIs with Python, as well 
 
 Make sure you have npyscreen installed for this to work. Learn more about npyscreen here: http://npyscreen.readthedocs.io/
 
+The application starts at main.py. The actual API call and conversion happens in currencyconverter.py
+
 ### Prerequisites
 
-npyscreen 
+npyscreen
 
 ### Installing
 
