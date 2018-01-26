@@ -9,7 +9,7 @@ import urllib.request
 print("Currency Converter")
 print("Currency information provided by the free, open source Fixer API. Type QUIT to quit.")
 
-print('\n\n')
+print('\n')
 
 # Loop that allows more than one conversion without restarting program
 while True:
