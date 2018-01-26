@@ -1,7 +1,3 @@
-# Currency Converter
-# Written by Justin White
-# Released under the MIT License https://opensource.org/licenses/MIT
-
 import json
 import urllib.request
 
