@@ -1,9 +1,9 @@
 import npyscreen
+from currencyconverter import CurrencyConverter
 
-class CurrencyConverter(npyscreen.NPSAppManaged):
+class CurrencyConverterApp(npyscreen.NPSAppManaged):
     def onStart(self):
         self.addForm('MAIN', MainForm, name="Currency Converter")
-        self.addForm('ResultsForm', ResultsForm, name="Results")
 
 
 class MainForm(npyscreen.ActionForm):
@@ -14,7 +14,7 @@ class MainForm(npyscreen.ActionForm):
 
 
     def afterEditing(self):
-        self.parentApp.setNextForm('ResultsForm')
+        self.parentApp.setNextForm('MAIN')
 
     def getOptions(self):
         options = ['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR',
@@ -24,20 +24,31 @@ class MainForm(npyscreen.ActionForm):
         return options
 
     def on_ok(self):
-        print(self.amount_to_convert.value)
-        print(self.convert_from.value)
-        print(self.convert_to.value)
+        # call to show Results
+        self.show_results()
 
     def on_cancel(self):
         exit()
 
-class ResultsForm(npyscreen.Form):
-    def create(self):
-        self.add(npyscreen.TitleText, name="Results", value="TEST")
+    def show_results(self):
 
-    def afterEditing(self):
-        self.setNextForm(None)
+        #npyscreen.notify_confirm(str(self.getOptions()[self.convert_to.value]), title='ERROR')
+
+        # Check to see if user is trying to convert to the same currency, alert if so
+        if self.convert_from.value == self.convert_to.value:
+            # display error
+            npyscreen.notify_confirm('Cannot convert to same currency', title='ERROR')
+        else:
+            # For readability, type casting and assigning to var
+            to_convert = float(self.amount_to_convert.value)
+            to_convert_from = str(self.getOptions()[self.convert_from.value])
+            to_convert_to = str(self.getOptions()[self.convert_to.value])
+            result = CurrencyConverter.convert(to_convert, to_convert_from, to_convert_to)
+
+            message = str(to_convert) + ' ' + to_convert_from + ' = ' + str(result) + ' ' + to_convert_to
+            npyscreen.notify_confirm(message, title='Results')
+
 
 
 if __name__ == '__main__':
-    app = CurrencyConverter().run()
+    app = CurrencyConverterApp().run()
