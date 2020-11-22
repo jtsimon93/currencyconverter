@@ -5,7 +5,7 @@ class CurrencyConverter:
     def convert(amount_to_convert, convert_from, convert_to):
 
         # Build URL
-        url = 'http://api.fixer.io/latest?base=' + convert_from
+        url = 'https://api.ratesapi.io/api/latest?base=' + convert_from
 
         # Use urllib to get the JSON info from the API
         with urllib.request.urlopen(url) as response:
